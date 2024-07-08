@@ -1,12 +1,16 @@
-const express = require('express');
+const express = require('express')
+const app = express()
+const cors = require('cors');
 const path = require('path');
-const serverless = require('serverless-http');
 
-const app = express();
+app.use(cors());
 
 app.get('/', (req, res) => {
     const filePath = path.join(__dirname, '../aditya_resume.pdf');
     res.sendFile(filePath);
 });
 
-module.exports.handler = serverless(app);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
+})
